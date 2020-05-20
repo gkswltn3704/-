@@ -16,5 +16,7 @@ public class TestMain {
 		
 		Monitor mt = factory.getBean("sm", Monitor.class);				//sm으로 불러온다.
 		mt.showMonitor();												//showMonitor를 실행.
+		
+		
 	}
 }

@@ -92,13 +92,30 @@ public class MysqlDAO implements DAO {
 	@Override
 	public void updateOne(DeptDTO dto) {
 		// TODO Auto-generated method stub
-
+		sb.setLength(0);
+		sb.append("update dept ");
+		sb.append("set dname = ?, loc = ? ");
+		sb.append("where deptno = ? ");
+		
+		int result = jdbcTemplate.update(sb.toString(), dto.getDname(), 
+				dto.getLoc(), dto.getDeptno());
+		
+		System.out.println("insert 처리 결과 : "+ result);
+		
 	}
 
 	@Override
 	public void deleteOne(int no) {
 		// TODO Auto-generated method stub
-
+		sb.setLength(0);
+		sb.append("delete from dept ");
+		sb.append("where deptno = ? ");
+		
+		int result = jdbcTemplate.update(sb.toString(), no);
+		
+		System.out.println("delete 처리 결과 : "+ result);
+		
+		
 	}
 
 }

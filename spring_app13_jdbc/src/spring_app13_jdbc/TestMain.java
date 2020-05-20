@@ -24,6 +24,7 @@ public class TestMain {
 		System.out.println("--------------------------------------------");
 		
 		//개별 조회
+		
 //		DeptDTO dto = d.selectOne(30);
 //		System.out.println(dto.getDname());
 		
@@ -31,18 +32,22 @@ public class TestMain {
 		
 		//데이터 입력
 		
-		DeptDTO dto2 = new DeptDTO(60, "영업1", "구로디지털단지역");
-		d.insertOne(dto2);
+//		DeptDTO dto2 = new DeptDTO(60, "영업1", "구로디지털단지역");
+//		d.insertOne(dto2);
 		
+		System.out.println("--------------------------------------------");
 		
+		// 데이터 수정
 		
+//		DeptDTO dto3 = new DeptDTO(60, "fire", "seoul");
+//		d.updateOne(dto3);
 		
+		System.out.println("--------------------------------------------");
 		
+		// 데이터 삭제
 		
-		
-		
-		
-		
+		d.deleteOne(60);
+
 		
 	}
 }
