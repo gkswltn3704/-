@@ -17,7 +17,7 @@
 	</bean>
 	
 	<!-- Controller  -->
-	<bean id="/hello.do" class="kr.co.goott.www.HelloController"></bean>
-	
+	<bean id="/*.hello.do" class="kr.co.goott.www.HelloController"></bean>
+	<!--  /*.으로 앞에 사용자가 지은 url이름으로 사이트 가능하게하기 -->
 	
 </beans>
