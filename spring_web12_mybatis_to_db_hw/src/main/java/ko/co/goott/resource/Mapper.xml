@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace=" ">
+  
+  	<select id="selectAllEmp" resultType="dto">
+  		select * from emp order by empno desc
+  	</select>
+  	
+  	<insert id="insertOneEmp" parameterType="dto">
+  		insert into emp(empno, ename, sal, deptno)				<!-- 넣고 싶은 부분을 지정하여 주기.  -->
+		values (#{empno}, #{ename}, #{sal}, #{deptno})
+  	</insert> 
+  
+ </mapper>
