@@ -1,0 +1,75 @@
++ MyBatis 표현식
+
+- IF 
+ ex) <if test="Content != null">
+ 		명령문....
+ 	</if>
+ 	
+- choose(when, otherwise)
+ex)
+<select id="findActiveBlogLike" resultType="Blog">
+  SELECT * FROM BLOG WHERE state = ‘ACTIVE’
+  <choose>
+    <when test="title != null">
+      	명령문...
+    </when>
+    <when test="author != null and author.name != null">
+     	 명령문...
+    </when>
+    <otherwise>
+      	명령문...
+    </otherwise>
+  </choose>
+</select>
+
+
+- trim, where, set
+ex)
+<update id="updateMember" paramterType="dto">
+	update tbl_member
+	
+	<trim prefix="set" suffixOverrides=",">							//,를 제거해서 따로따로 set을 하겠다.
+		<if test="username != null"> username = #{username},</if>
+		<if test="email != null"> email = #{email},</if>
+		<if test="mp != null"> mp = #{mp}</if>
+	</trim>
+	where uid = #{uid}
+</update>
+
+ex) 연산자
+<select id="empInfo" paramerType="int" resultType="empDto">
+	select * from emp
+	
+	<trim prefix="where" prefixOverrides="AND | OR">
+		<if test = "ename != null">ename = #{ename}</if>
+		<if test = "sal != null">and sal = #{sal}</if>
+		<if test = "deptno != null">and deptno = #{deptno}</if>
+	</trim>
+</select>
+
+
+
+- 반복
+<select id="selectPostIn" resultType="domain.blog.Post">
+  SELECT *
+  FROM POST P
+  WHERE ID in
+  <foreach item="item" index="index" collection="list"
+      open="(" separator="," close=")">
+        #{item}
+  </foreach>
+</select>
+
+
+<select>
+<![CDATA[
+	select * from dept
+	where deptno > 30;
+]]>
+
+
+</select>
+	
+	
+	
+	
