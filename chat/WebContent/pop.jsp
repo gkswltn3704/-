@@ -15,7 +15,7 @@
 	#all{
 	    width: 750px;
 	    height: 1020px;
-	    background: darkgray;
+	    background: #e5e5e5;
 	    margin:0 auto;
 	    font-size: 0;
 	    border-radius: 5px;
@@ -29,7 +29,7 @@
 	#list{
 	    width:750px;
 	    height: 998px;
-	    background: white;
+	    background: #e5e5e5;
 	    margin:0 auto;
 	    font-size: 0;
 	    border-radius: 5px;
@@ -43,7 +43,7 @@
 	#list_header {
 		width: 750px;
 	    height: 21px;
-	    background: darkgray;
+	    background: #e5e5e5;
 	    margin:0 auto;
 	    font-size: 0;
 	    border-radius: 5px;
@@ -64,11 +64,10 @@
 		float: right;	
 	}
 	
-	
 	aside{
 	    width: 280px;
 	    height: 100%;
-	    background-color: lightgrey;
+	    background-color: #e5e5e5;
 	    display: inline-block;
 	    font-size: 15px;
 	    vertical-align: top;
@@ -83,10 +82,10 @@
 	    height: 50px;
 	    line-height:50px;
 	    padding:0 50px 0 20px;
-	    background-color: darkgrey;
-	    border:none;
+	    background-color: lightgray;
+	    outline: 0;
+	    border: none;
 	    border-radius: 3px;
-	    color: black;
 	    background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/ico_search.png);
 	    background-repeat: no-repeat;
 	    background-position: 170px;
@@ -94,7 +93,7 @@
 	}
 	
 	aside input::placeholder{
-	    color: lightgrey;
+	    color: black;
 	}
 	
 	aside ul{						/* 채팅 목록의 스크롤  */
@@ -147,8 +146,13 @@
 
 <style type="text/css">
 	.col-md-2, .col-md-10{
-	    padding:0;
+	    padding: 0;
 	}
+	
+	.col-xs-9{
+		padding: 0;
+	}
+	
 	
 	.panel{
 	    margin-bottom: 0px;
@@ -159,60 +163,79 @@
 		right: 300px;
 	    position: fixed;
 	    float: right;
-	
 	}
+	
 	.chat-window > div > .panel{
 	    border-radius: 5px 5px 0 0;
 	}
-	.icon_minim{
-	    padding:2px 10px;
+	
+	.icon_arrow-down{
+	    padding: 2px 4px;
 	}
+	
+	.icon_plus{
+	    padding: 2px 4px;
+	}
+	
+	.icon_close_chat{
+	    padding: 2px 4px;
+	}
+	
 	.msg_container_base{
 	  background: #e5e5e5;
 	  margin: 0;
 	  padding: 0 10px 10px;
-	  max-height:300px;
-	  overflow-x:hidden;
+	  max-height: 300px;
+	  overflow-x: hidden;
 	}
+	
 	.top-bar {
 	  background: #666;
 	  color: white;
-	  padding: 10px;
+	  padding: 6px;
 	  position: relative;
 	  overflow: hidden;
 	}
+	
 	.msg_receive{
-	    padding-left:0;
-	    margin-left:0;
+	    padding-left: 0;
+	    margin-left: 0;
 	}
+	
 	.msg_sent{
-	    padding-bottom:20px !important;
-	    margin-right:0;
+	    padding-bottom: 20px !important;
+	    margin-right: 0;
 	}
 	.messages {
 	  background: white;
 	  padding: 10px;
 	  border-radius: 2px;
 	  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-	  max-width:100%;
+	  max-width: 100%;
 	}
+	
 	.messages > p {
 	    font-size: 13px;
 	    margin: 0 0 0.2rem 0;
-	  }
+	}
+	
 	.messages > time {
 	    font-size: 11px;
 	    color: #ccc;
 	}
-	.msg_container {
+	
+	.msg
+	_container {
 	    padding: 10px;
 	    overflow: hidden;
 	    display: flex;
 	}
+	
 	.chatimg {
 	    display: block;
 	    width: 100%;
 	}
+	
 	.avatar {
 	    position: relative;
 	}
@@ -234,25 +257,11 @@
 	  align-items: flex-end;
 	}
 	
-	.base_sent > .avatar:after {
-	    content: "";
-	    position: absolute;
-	    bottom: 0;
-	    left: 0;
-	    width: 0;
-	    height: 0;
-	    border: 5px solid white;
-	    border-right-color: transparent;
-	    border-top-color: transparent;
-	    box-shadow: 1px 1px 2px rgba(black, 0.2); // not quite perfect but close
-	}
-	
 	.msg_sent > time{
 	    float: right;
 	}
 	
-	
-	.msg_container_base::-webkit-scrollbar-track
+	.msg_container_base:: -webkit-scrollbar-track
 	{
 	    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
 	    background-color: #F5F5F5;
@@ -270,31 +279,68 @@
 	    background-color: #555;
 	}
 	
-	.btn-group.dropup{
-	    position:fixed;
-	    left:0px;
-	    bottom:0;
-	}
-	
 	.panel-footer {
 	    padding: 10px 15px;
 	    background-color: lightgrey;
 	    border-top: 1px solid #ddd;
 	    border-bottom-right-radius: 3px;
 	    border-bottom-left-radius: 3px;
-
-
+	
 </style>
+
 
 <style type="text/css">
-	
-	#plusForm {
 
+	.pluschat-window{
+	    bottom: 0;
+		right: 725px;
+		width: 330px;
+	    position: fixed;
+	    float: right;
 	}
 	
+	.pluschat-window > div > .panel{
+	    border-radius: 5px 5px 0 0;
+	}
+	
+	#listbody {
+		width: 100%;
+		height: 250px;
+	}
+	
+	.new-chat {								/* 새로운 채팅 시작하기 버튼  */
+		color: white;
+		font-size: 13px;
+        line-height: 3px;
+		width: 100%;
+		height: 45px;
+	    padding: 10px 20px;
+	    background-color: lightgrey;
+	   	border-top: 1px solid #d8d8d8;
+	    border-bottom-right-radius: 3px;
+	    border-bottom-left-radius: 3px;
+	    border: 0;
+	    outline: 0;
+	}
+	
+	#search input {						/* 사용자 찾기 위한 검색창  */
+		display: block;
+	    width: 100%;
+	    box-sizing: border-box;
+	    height: 36px;
+	    border: 0;
+	    outline: 0;
+	    border-bottom: 1px solid #d8d8d8;
+	    padding: 0 8px;
+	    font-size: 12px;
+	    line-height: 34px;
+	    color: #3d3c40;
+	}
+
 
 </style>
-	
+
+
 
 </head>
 <body>
@@ -303,7 +349,7 @@
 
 	<div id="list_header">
 		<span id="head_font">대화</span>
-		<button type="button" class="plus" id="plus">+</button>
+		<button type="button" class="plus" id="plus" onclick="newopenForm()">+</button>
 	</div>
 	
 	<div id="list">
@@ -407,31 +453,28 @@
 	                    </h3>
 	                </div>
 	            </li>
-	            
-	            
+
 	            <!-- <li></li>이 DB에서 접속사용자 가져오게...  -->
+	            
 	            
 	            <footer>
 	    			<input type="text" placeholder="search">
 	    		</footer>
+	    		
 	        </ul>
     	</aside>
 	</div>
 	
-<!--     <div id="list_footer">
-	    <footer>
-	    	<input type="text" placeholder="search">
-	    </footer>
-    </div> -->
     
 </div>
 <!-- 채팅 목록 리스트 end  -->
 
 
 <!-- 채팅 화면 div -->
-<div class="container pull-right" id="chatbox">
+<div class="show1" id="chatbox">
     <div class="row chat-window col-xs-5 col-md-3 pull-right" id="chat_window_1">
         <div class="col-xs-12 col-md-12">
+        
           <div class="panel panel-default">
           
                 <div class="panel-heading top-bar">
@@ -440,9 +483,10 @@
                         <h3 class="panel-title"><span class="glyphicon glyphicon-comment"></span>사용자ID(사용자이름)</h3>
                     </div>
                     
-                    <div class="col-md-4 col-xs-4" style="text-align: right;">
-                        <a href="#"><span id="minim_chat_window" class="glyphicon glyphicon-minus icon_minim"></span></a>
-                        <a href="#"><span class="glyphicon glyphicon-remove icon_close" data-id="chat_window_1"></span></a>
+                    <div class="col-md-4 col-xs-9" style="text-align: right;">
+                        <a href="#"><span id="minim_chat_window" class="glyphicon glyphicon-arrow-down icon_arrow-down"></span></a>
+                        <a href="#"><span id="plus_chat_window" class="glyphicon glyphicon-plus icon_plus" onclick="newopenForm()"></span></a>
+                        <a href="#"><span class="glyphicon glyphicon-remove icon_close_chat" data-id="chat_window_1"></span></a>
                     </div>
                     
                 </div>
@@ -521,55 +565,73 @@
                         </div>
                     </div>
                 </div>
+                
              </div>
              
              <div class="panel-footer">
              	<div class="input-group">
              		<input id="btn-input" type="text" class="form-control input-sm chat_input" placeholder="메세지를 입력해주세요..." required="required" />
-                       <span class="input-group-btn">
-                       		<button class="btn btn-primary btn-sm" id="btn-chat">보내기</button>
-                       </span>
+                    <span class="input-group-btn">
+                    	<button class="btn btn-primary btn-sm" id="btn-chat">보내기</button>
+                    </span>
                 </div>
              </div>
              
         </div>
-    </div>
-
-    
-    <div class="btn-group dropup">
-        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-            <span class="glyphicon glyphicon-cog"></span>
-            <span class="sr-only">Toggle Dropdown</span>
-        </button>
-        <ul class="dropdown-menu" role="menu">
-            <li><a href="#" id="new_chat"><span class="glyphicon glyphicon-plus"></span> Novo</a></li>
-            <li><a href="#"><span class="glyphicon glyphicon-list"></span> Ver outras</a></li>
-            <li><a href="#"><span class="glyphicon glyphicon-remove"></span> Fechar Tudo</a></li>
-            <li class="divider"></li>
-            <li><a href="#"><span class="glyphicon glyphicon-eye-close"></span> Invisivel</a></li>
-        </ul>
-    </div>
+    </div> 
 </div>
 
 <!-- 채팅화면 div end  -->
 
-<!-- 새로운 채팅방 div  -->
 
+
+<!-- 새로운 채팅 div  -->
+
+<!-- 새로운 채팅 추가 div -->
+<div class="show2" id="pluschatbox">
+    <div class="row pluschat-window col-xs-5 col-md-3 pull-right" id="pluschat_window">
+        <div class="col-xs-12 col-md-12">
+          <div class="panel panel-default">
+          
+                <div class="panel-heading top-bar">
+                
+                    <div class="col-md-8 col-xs-8">
+                        <span class="comment">새로운대화</span>
+                    </div>
+                    
+                    <div class="col-md-4 col-xs-4" style="text-align: right;">
+                        <a href="#"><span class="glyphicon glyphicon-remove icon_close_new" data-id="pluschat_window"></span></a>
+                    </div>
+                    
+                </div> <!-- 새로운대화 상단바  -->
+                
+                <div id="search">
+	    			<input type="text" placeholder="이름을 입력하세요">
+	    		</div>
+                
+                
+                <div id="listbody" class="panel-body msg_container_base">
+                    <div class="row msg_container base_sent">
+                        <div class="col-md-10 col-xs-10">
+                        	<span class="user-display-name__id">(userID)</span>
+							<span class="user-display-name__nickname"> (userName)</span>
+                        </div>
+                    </div>
+                </div>
+           </div>
+   			
+           <button class="new-chat" id="new-chat">대화시작하기</button>
+    
+        </div>
+    </div>
+</div>
+
+<!-- 새로운 채팅 추가 end  -->
 
 
 
 <!-- js -->
 <script type="text/javascript">
-	
-	function plusForm() {
-		document.getElementById("plusForm").style.display = "block";
-	}
-	
-	function closeForm() {
-		  document.getElementById("plusForm").style.display = "none";
-	}
-	
-	
 	
 	function openForm() {
 	  document.getElementById("chatbox").style.display = "block";
@@ -579,35 +641,38 @@
 	  document.getElementById("chatbox").style.display = "none";
 	}
 	
-	
-	$(document).on('click', '.panel-heading span.icon_minim', function (e) {
+	$(document).on('click', '.panel-heading span.icon_arrow-down', function (e) {
 	    var $this = $(this);
+	    
 	    if (!$this.hasClass('panel-collapsed')) {
 	        $this.parents('.panel').find('.panel-body').slideUp();
 	        $this.addClass('panel-collapsed');
-	        $this.removeClass('glyphicon-minus').addClass('glyphicon-plus');
+	        $this.removeClass('glyphicon-arrow-down').addClass('glyphicon-arrow-up');
 	    } else {
 	        $this.parents('.panel').find('.panel-body').slideDown();
 	        $this.removeClass('panel-collapsed');
-	        $this.removeClass('glyphicon-plus').addClass('glyphicon-minus');
+	        $this.removeClass('glyphicon-arrow-up').addClass('glyphicon-arrow-down');
 	    }
 	});
+	
 	$(document).on('focus', '.panel-footer input.chat_input', function (e) {
 	    var $this = $(this);
 	    if ($('#minim_chat_window').hasClass('panel-collapsed')) {
 	        $this.parents('.panel').find('.panel-body').slideDown();
 	        $('#minim_chat_window').removeClass('panel-collapsed');
-	        $('#minim_chat_window').removeClass('glyphicon-plus').addClass('glyphicon-minus');
+	        $('#minim_chat_window').removeClass('glyphicon-arrow-up').addClass('glyphicon-arrow-down');
 	    }
 	});
-	$(document).on('click', '#new_chat', function (e) {
+	
+	$(document).on('click', '#newchat', function (e) {
 	    var size = $( ".chat-window:last-child" ).css("margin-left");
-	     size_total = parseInt(size) + 400;
+	    size_total = parseInt(size) + 400;
 	    alert(size_total);
-	    var clone = $( "#chat_window_1" ).clone().appendTo( ".container" );
+	    var clone = $( "#newchat_window" ).clone().appendTo( ".container" );
 	    clone.css("margin-left", size_total);
 	});
-	$(document).on('click', '.icon_close', function (e) {
+	
+	$(document).on('click', '.icon_close_chat', function (e) {
 	    //$(this).parent().parent().parent().parent().remove();
 	    $( "#chatbox" ).hide();
 	});
@@ -636,22 +701,60 @@
 	}
 		
 	$(body).appendTo("#messagebody");
+	
 	$('#btn-input').val('');
+	
 	$("#messagebody").animate({ scrollTop: $("#messagebody")[0].scrollHeight}, 'slow');
 	}
+	// send function end
 
-// send function end
-
-$( "#btn-chat" ).click(function() {
-send()
-});
-
-$('#btn-input').keypress(function (e) {
-  if (e.which == 13) {
-    send()
-  }
-});
+	$( "#btn-chat" ).click(function() {
+		send()
+	});
+	
+	$('#btn-input').keypress(function (e) {
+	  if (e.which == 13) {
+	    send()
+	  }
+	});
 </script>
+
+
+
+<script type="text/javascript">
+	
+	function newopenForm() {
+	  document.getElementById("pluschatbox").style.display = "block";
+	}
+
+	function newcloseForm() {
+	  document.getElementById("pluschatbox").style.display = "none";
+	}
+	
+	$(document).on('click', '#pluschat', function (e) {
+	    var size = $( ".pluschat-window:last-child" ).css("margin-left");
+	     size_total = parseInt(size) + 400;
+	    alert(size_total);
+	    var clone = $( "#pluschat-window" ).clone().appendTo( ".container" );
+	    clone.css("margin-left", size_total);
+	});
+	
+	$(document).on('click', '.icon_close_new', function (e) {
+	    //$(this).parent().parent().parent().parent().remove();
+	    $( "#pluschatbox" ).hide();
+	});
+	
+	
+		
+	/* refresh에 리스트만 나오게 하기  */
+	
+	$(document).ready(function() {
+		$('.show1').hide(); 			//페이지를 로드할 때 표시할 요소
+		$('.show2').hide(); 			//페이지를 로드할 때 숨길 요소
+	});
+
+</script>
+
 
 
 </body>

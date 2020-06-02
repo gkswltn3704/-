@@ -20,14 +20,14 @@
 	    margin-bottom: 0px;
 	}
 	
-	.chat-window{
+	.newchat-window{
 	    bottom: 0;
 		right: 600px;
 	    position: fixed;
 	    float: right;
 	}
 	
-	.chat-window > div > .panel{
+	.newchat-window > div > .panel{
 	    border-radius: 5px 5px 0 0;
 	}
 	
@@ -50,6 +50,7 @@
 	  position: relative;
 	  overflow: hidden;
 	}
+	
 	.msg_receive{
 	    padding-left:0;
 	    margin-left:0;
@@ -151,27 +152,42 @@
 	    bottom: 0;
 	}
 	
-	.panel-footer {
-	    padding: 10px 140px;
+	.new-chat {								/* 새로운 채팅 시작하기 버튼  */
+		color: #497bd8;
+		font-size: 13px;
+        line-height: 3px;
+		width: 100%;
+		height: 36px;
+	    padding: 10px 20px;
 	    background-color: lightgrey;
-	    border-top: 1px solid #ddd;
+	   	border-top: 1px solid #d8d8d8;
 	    border-bottom-right-radius: 3px;
 	    border-bottom-left-radius: 3px;
+	    border: 0;
 	}
 	
-	#btn-chat{
-		width: 100%;
+	#search input {						/* 사용자 찾기 위한 검색창  */
+		display: block;
+	    width: 100%;
+	    box-sizing: border-box;
+	    height: 34px;
+	    border: 0;
+	    outline: 0;
+	    border-bottom: 1px solid #d8d8d8;
+	    padding: 0 8px;
+	    font-size: 12px;
+	    line-height: 34px;
+	    color: #3d3c40;
 	}
 	
-
+	
 </style>
-
 
 <body>
 
-	<!-- 채팅 화면 div -->
-<div class="container pull-right" id="chatbox">
-    <div class="row chat-window col-xs-5 col-md-3 pull-right" id="chat_window_1">
+<!-- 새로운 채팅 추가 div -->
+<div class="pull-right" id="newchatbox">
+    <div class="row newchat-window col-xs-5 col-md-3 pull-right" id="new_chat_window">
         <div class="col-xs-12 col-md-12">
         
           <div class="panel panel-default">
@@ -179,14 +195,18 @@
                 <div class="panel-heading top-bar">
                 
                     <div class="col-md-8 col-xs-8">
-                        <h3 class="panel-title"><span class="glyphicon glyphicon-comment"></span>새로운 대화방</h3>
+                        <span class="comment">새로운대화</span>
                     </div>
                     
                     <div class="col-md-4 col-xs-4" style="text-align: right;">
-                        <a href="#"><span class="glyphicon glyphicon-remove icon_close" data-id="chat_window_1"></span></a>
+                        <a href="#"><span class="glyphicon glyphicon-remove icon_close" data-id="new_chat_window"></span></a>
                     </div>
                     
-                </div>
+                </div> <!-- 새로운대화 상단바  -->
+                
+                <div id="search">
+	    			<input type="text" placeholder="이름을 입력하세요">
+	    		</div>
                 
                 <div id="messagebody" class="panel-body msg_container_base">
 
@@ -196,72 +216,35 @@
                                 <p>여기에 검색된 리스트 출력</p>
                             </div>
                         </div>
-                        <div class="col-md-2 col-xs-2 avatar">
-                           
-                        </div>
                     </div>
- 
+                    
                 </div>
                 
-             </div>
-             
-             <div class="panel-footer">
-             	<div class="input-group">
-             		  <span class="input-group-btn">
-                       		<button class="btn btn-primary btn-sm" id="btn-chat">대화시작하기</button>
-                       </span>
-                </div>
-             </div>
-             
+           </div>
+   
+             <button class="new-chat" id="new-chat">대화시작하기</button>
+    
         </div>
     </div>
 
     
-    <div class="btn-group dropup">
-        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-            <span class="glyphicon glyphicon-cog"></span>
-            <span class="sr-only">Toggle Dropdown</span>
-        </button>
-        
-        <ul class="dropdown-menu" role="menu">
-            <li><a href="#" id="new_chat"><span class="glyphicon glyphicon-plus"></span> Novo</a></li>
-            <li><a href="#"><span class="glyphicon glyphicon-list"></span> Ver outras</a></li>
-            <li><a href="#"><span class="glyphicon glyphicon-remove"></span> Fechar Tudo</a></li>
-            <li class="divider"></li>
-            <li><a href="#"><span class="glyphicon glyphicon-eye-close"></span> Invisivel</a></li>
-        </ul>
-    </div>
-    
 </div>
+<!-- 새로운 채팅 추가 end  -->
 
-<!-- 채팅화면 div end  -->
 
-
-<!-- js -->
+<!-- 새로운 채팅 축js -->
 <script type="text/javascript">
 	
-	function openForm() {
-	  document.getElementById("chatbox").style.display = "block";
+	function newopenForm() {
+	  document.getElementById("newchatbox").style.display = "block";
 	}
 
-	function closeForm() {
-	  document.getElementById("chatbox").style.display = "none";
+	function newcloseForm() {
+	  document.getElementById("newchatbox").style.display = "none";
 	}
 	
 	
-	$(document).on('click', '.panel-heading span.icon_minim', function (e) {
-	    var $this = $(this);
-	    if (!$this.hasClass('panel-collapsed')) {
-	        $this.parents('.panel').find('.panel-body').slideUp();
-	        $this.addClass('panel-collapsed');
-	        $this.removeClass('glyphicon-minus').addClass('glyphicon-plus');
-	    } else {
-	        $this.parents('.panel').find('.panel-body').slideDown();
-	        $this.removeClass('panel-collapsed');
-	        $this.removeClass('glyphicon-plus').addClass('glyphicon-minus');
-	    }
-	});
-	$(document).on('focus', '.panel-footer input.chat_input', function (e) {
+	$(document).on('focus', '.new-chat input.chat_input', function (e) {
 	    var $this = $(this);
 	    if ($('#minim_chat_window').hasClass('panel-collapsed')) {
 	        $this.parents('.panel').find('.panel-body').slideDown();
@@ -269,16 +252,18 @@
 	        $('#minim_chat_window').removeClass('glyphicon-plus').addClass('glyphicon-minus');
 	    }
 	});
+	
 	$(document).on('click', '#new_chat', function (e) {
-	    var size = $( ".chat-window:last-child" ).css("margin-left");
+	    var size = $( ".newchat-window:last-child" ).css("margin-left");
 	     size_total = parseInt(size) + 400;
 	    alert(size_total);
-	    var clone = $( "#chat_window_1" ).clone().appendTo( ".container" );
+	    var clone = $( "#new_chat_window" ).clone().appendTo( ".container" );
 	    clone.css("margin-left", size_total);
 	});
+	
 	$(document).on('click', '.icon_close', function (e) {
 	    //$(this).parent().parent().parent().parent().remove();
-	    $( "#chatbox" ).hide();
+	    $( "#newchatbox" ).hide();
 	});
 	
 	// send function start
@@ -311,9 +296,11 @@
 
 // send function end
 
-$( "#btn-chat" ).click(function() {
+
+$( "#new-chat" ).click(function() {
 	send()
 });
+
 
 $('#btn-input').keypress(function (e) {
   if (e.which == 13) {
