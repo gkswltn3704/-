@@ -3,468 +3,121 @@
 <!DOCTYPE html>
 <html>
 <meta charset="UTF-8">
-<head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<title> 만든 채팅 (not controller)</title>
+<head>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
-<style type="text/css">
-	/* 채팅 목록 CSS  */	
-	
-	#all{
-	    width: 750px;
-	    height: 1020px;
-	    background: #e5e5e5;
-	    margin:0 auto;
-	    font-size: 0;
-	    border-radius: 5px;
-	    overflow: hidden;
-	   	position: fixed;
-	  	bottom: 0;
-	  	right: 28px;
-	  	width: 280px;
-	}
-	
-	#list{
-	    width:750px;
-	    height: 998px;
-	    background: #e5e5e5;
-	    margin:0 auto;
-	    font-size: 0;
-	    border-radius: 5px;
-	    overflow: hidden;
-	   	position: fixed;
-	  	bottom: 0;
-	  	right: 28px;
-	  	width: 280px;
-	}
-	
-	#list_header {
-		width: 750px;
-	    height: 21px;
-	    background: #e5e5e5;
-	    margin:0 auto;
-	    font-size: 0;
-	    border-radius: 5px;
-	    overflow: hidden;
-	   	position: fixed;
-	  	right: 28px;
-	  	width: 280px;
-	}
-	
-	#head_font{
-		font-size: 16px;
-		color: black;
-		font-weight: normal;
-	}
-	
-	.plus{ 
-		font-size: 10px;
-		float: right;	
-	}
-	
-	aside{
-	    width: 280px;
-	    height: 100%;
-	    background-color: #e5e5e5;
-	    display: inline-block;
-	    font-size: 15px;
-	    vertical-align: top;
-	}
 
-	aside footer{
-	    padding:30px 20px;
-	}
-	
-	aside input{						/* 검색기능 CSS  */
-	    width: 100%;
-	    height: 50px;
-	    line-height:50px;
-	    padding:0 50px 0 20px;
-	    background-color: lightgray;
-	    outline: 0;
-	    border: none;
-	    border-radius: 3px;
-	    background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/ico_search.png);
-	    background-repeat: no-repeat;
-	    background-position: 170px;
-	    background-size: 40px;
-	}
-	
-	aside input::placeholder{
-	    color: black;
-	}
-	
-	aside ul{						/* 채팅 목록의 스크롤  */
-	    padding-left: 0;
-	    margin: 0;
-	    list-style-type: none;
-	    overflow-y: scroll;
-	    height: 100%;
-	}
-	
-	aside li{
-	    padding: 10px 0;
-	}
-	
-	aside li:hover{
-	    background-color: #5e616a;
-	}
-	
-	h2, h3{
-	    margin: 0;
-	}
-	
-	aside li img{
-	    border-radius: 50%;
-	    margin-left: 20px;
-	    margin-right: 8px;
-	}
-	
-	aside li div{
-	    display: inline-block;
-	    vertical-align: top;
-	    margin-top: 12px;
-	}
-	
-	aside li h2{				/* 접속자 리스트 이름  */
-	    font-size: 14px;
-	    color: black;
-	    font-weight: normal;
-	    margin-bottom: 5px;
-	}
-	
-	aside li h3{				/* 멤버들 접속현황 (그린/레드로 구분)  */
-	    font-size: 12px;
-	    color: red;
-	    font-weight: normal;
-	}
-	
-</style>
-
-
-<style type="text/css">
-	.col-md-2, .col-md-10{
-	    padding: 0;
-	}
-	
-	.col-xs-9{
-		padding: 0;
-	}
-	
-	
-	.panel{
-	    margin-bottom: 0px;
-	}
-	
-	.chat-window{
-	    bottom: 0;
-		right: 300px;
-	    position: fixed;
-	    float: right;
-	}
-	
-	.chat-window > div > .panel{
-	    border-radius: 5px 5px 0 0;
-	}
-	
-	.icon_arrow-down{
-	    padding: 2px 4px;
-	}
-	
-	.icon_plus{
-	    padding: 2px 4px;
-	}
-	
-	.icon_close_chat{
-	    padding: 2px 4px;
-	}
-	
-	.msg_container_base{
-	  background: #e5e5e5;
-	  margin: 0;
-	  padding: 0 10px 10px;
-	  max-height: 300px;
-	  overflow-x: hidden;
-	}
-	
-	.top-bar {
-	  background: #666;
-	  color: white;
-	  padding: 6px;
-	  position: relative;
-	  overflow: hidden;
-	}
-	
-	.msg_receive{
-	    padding-left: 0;
-	    margin-left: 0;
-	}
-	
-	.msg_sent{
-	    padding-bottom: 20px !important;
-	    margin-right: 0;
-	}
-	.messages {
-	  background: white;
-	  padding: 10px;
-	  border-radius: 2px;
-	  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-	  max-width: 100%;
-	}
-	
-	.messages > p {
-	    font-size: 13px;
-	    margin: 0 0 0.2rem 0;
-	}
-	
-	.messages > time {
-	    font-size: 11px;
-	    color: #ccc;
-	}
-	
-	.msg
-	_container {
-	    padding: 10px;
-	    overflow: hidden;
-	    display: flex;
-	}
-	
-	.chatimg {
-	    display: block;
-	    width: 100%;
-	}
-	
-	.avatar {
-	    position: relative;
-	}
-	
-	.base_receive > .avatar:after {
-	    content: "";
-	    position: absolute;
-	    top: 0;
-	    right: 0;
-	    width: 0;
-	    height: 0;
-	    border: 5px solid #FFF;
-	    border-left-color: rgba(0, 0, 0, 0);
-	    border-bottom-color: rgba(0, 0, 0, 0);
-	}
-	
-	.base_sent {
-	  justify-content: flex-end;
-	  align-items: flex-end;
-	}
-	
-	.msg_sent > time{
-	    float: right;
-	}
-	
-	.msg_container_base:: -webkit-scrollbar-track
-	{
-	    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-	    background-color: #F5F5F5;
-	}
-	
-	.msg_container_base::-webkit-scrollbar
-	{
-	    width: 12px;
-	    background-color: #F5F5F5;
-	}
-	
-	.msg_container_base::-webkit-scrollbar-thumb
-	{
-	    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-	    background-color: #555;
-	}
-	
-	.panel-footer {
-	    padding: 10px 15px;
-	    background-color: lightgrey;
-	    border-top: 1px solid #ddd;
-	    border-bottom-right-radius: 3px;
-	    border-bottom-left-radius: 3px;
-	
-</style>
-
-
-<style type="text/css">
-
-	.pluschat-window{
-	    bottom: 0;
-		right: 725px;
-		width: 330px;
-	    position: fixed;
-	    float: right;
-	}
-	
-	.pluschat-window > div > .panel{
-	    border-radius: 5px 5px 0 0;
-	}
-	
-	#listbody {
-		width: 100%;
-		height: 250px;
-	}
-	
-	.new-chat {								/* 새로운 채팅 시작하기 버튼  */
-		color: white;
-		font-size: 13px;
-        line-height: 3px;
-		width: 100%;
-		height: 45px;
-	    padding: 10px 20px;
-	    background-color: lightgrey;
-	   	border-top: 1px solid #d8d8d8;
-	    border-bottom-right-radius: 3px;
-	    border-bottom-left-radius: 3px;
-	    border: 0;
-	    outline: 0;
-	}
-	
-	#search input {						/* 사용자 찾기 위한 검색창  */
-		display: block;
-	    width: 100%;
-	    box-sizing: border-box;
-	    height: 36px;
-	    border: 0;
-	    outline: 0;
-	    border-bottom: 1px solid #d8d8d8;
-	    padding: 0 8px;
-	    font-size: 12px;
-	    line-height: 34px;
-	    color: #3d3c40;
-	}
-
-
-</style>
-
-
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="chat_css.css">  	<!-- css 파일 경로  -->
 
 </head>
 <body>
 
-<div id ="all">
+<div class="all"> 							<!-- 사용자 리스트 출력 div  -->
 
-	<div id="list_header">
+	<div id="list_header">					<!-- 대화 리스트 헤더  -->
 		<span id="head_font">대화</span>
-		<button type="button" class="plus" id="plus" onclick="newopenForm()">+</button>
+		<a href="#" id="plus" class="plus">
+			<span id="plus_chat_window" class="glyphicon glyphicon-plus icon_plus" onclick="newopenForm()"></span>        <!-- puls 이모티콘 추가-->
+		</a>
 	</div>
 	
-	<div id="list">
+	<div id="list">							<!-- 사용자 리스트 body  -->		
 		<aside>
-	        <ul>
-	        	<li onclick="openForm()">
-	        		<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="이미지">
-	        		<div>
-	        			<h2>한지수</h2>
-	        			<h3>
-	        				<span class="status orange"></span>
-	        				offline
-	        			</h3>
-	        		</div>
+	        <ul id="alllist">
+	        	
+	        	<li onclick="openForm()"> 												
+		        	<span class="dot" id="dot" ></span>								<!-- dot = 로그인/비로그인 으로 색 구분  -->
+		        	<div>
+		        		<h2><a>사용자</a></h2>				<!-- 사용자 id와 이름 가져오기 -->
+		        	</div>															<!-- javascript:void(0); = a태그 이동 x -->
 				</li>
 	            
 	            <li onclick="openForm()">
-	                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_02.jpg" alt="">
-	                <div>
-	                    <h2>이윤수</h2>
-	                    <h3>
-	                        <span class="status green"></span>
-	                        online
-	                    </h3>
-	                </div>
+	            	<span class="dot" id="dot"></span>
+	            	<div>
+	            		<h2><a>이윤수</a></h2>				<!-- a태그 이유는 검색을 위해서... -->	
+		            </div>
 	            </li>
 	            
 	            <li onclick="openForm()">
-	                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_03.jpg" alt="">
-	                <div>
-	                    <h2>이로운</h2>
-	                    <h3>
-	                        <span class="status orange"></span>
-	                        offline
-	                    </h3>
-	                </div>
+	            	<span class="dot" id="dot"></span>
+	            	<div>
+	            		<h2><a>이로운</a></h2>
+	            	</div>
 	            </li>
 	            
 	            <li onclick="openForm()">
-	                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_04.jpg" alt="">
-	                <div>
-	                    <h2>신한</h2>
-	                    <h3>
-	                        <span class="status green"></span>
-	                        online
-	                    </h3>
-	                </div>
+	            	<span class="dot" id="dot"></span>				
+		            <div>
+		                <h2><a>신한</a></h2>
+		            </div>
 	            </li>
 	            
 	            <li onclick="openForm()">
-	                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_05.jpg" alt="">
-	                <div>
-	                    <h2>Prénom Nom</h2>
-	                    <h3>
-	                        <span class="status orange"></span>
-	                        offline
-	                    </h3>
-	                </div>
+	            		<span class="dot" id="dot"></span>
+		                <div>
+		                    <h2><a>한지수</a></h2>
+		                </div>
 	            </li>
 	            
 	            <li onclick="openForm()">
-	                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_06.jpg" alt="">
-	                <div>
-	                    <h2>안녕</h2>
-	                    <h3>
-	                        <span class="status green"></span>
-	                        online
-	                    </h3>
-	                </div>
+	            		<span class="dot" id="dot"></span>
+		                <div>
+		                    <h2><a>백진우</a></h2>
+		                </div>
 	            </li>
 	            
 	            <li onclick="openForm()">
-	                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_07.jpg" alt="">
-	                <div>
-	                    <h2>실험</h2>
-	                    <h3>
-	                        <span class="status green"></span>
-	                        online
-	                    </h3>
-	                </div>
+	            		<span class="dot" id="dot"></span>
+		                <div>
+		                    <h2><a>주정은</a></h2>
+		                </div>
 	            </li>
 	            
 	            <li onclick="openForm()">
-	                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_08.jpg" alt="">
-	                <div>
-	                    <h2>접속자</h2>
-	                    <h3>
-	                        <span class="status green"></span>
-	                        online
-	                    </h3>
-	                </div>
+	            		<span class="dot" id="dot"></span>
+		                <div>
+		                    <h2><a>박채은</a></h2>
+		                </div>
 	            </li>
 	            
 	            <li onclick="openForm()">
-	                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_09.jpg" alt="">
-	                <div>
-	                    <h2>어렵다</h2>
-	                    <h3>
-	                        <span class="status green"></span>
-	                        online
-	                    </h3>
-	                </div>
+	            		<span class="dot" id="dot"></span>
+		                <div>
+		                    <h2><a>하지말자</a></h2>
+		                </div>
+	            </li>
+	            
+	            <li onclick="openForm()">
+		            	<span class="dot" id="dot"></span>					<!-- id="dot" =>> js를 위한 id  -->
+		            	<div>
+		                    <h2><a>강사님</a></h2>
+		            	</div>
+
 	            </li>
 
 	            <!-- <li></li>이 DB에서 접속사용자 가져오게...  -->
-	            
-	            
-	            <footer>
-	    			<input type="text" placeholder="search">
-	    		</footer>
-	    		
+	          
 	        </ul>
+
+	    	
     	</aside>
 	</div>
 	
+	<div id="list_footer">
+	    <!-- 검색하기 기능  -->
+	    <footer class="footer">
+	    	<input type="text" id="listsearch" onkeyup="list_search()" placeholder="이름 또는 아지트 아이디 검색">
+	    </footer>	        
+	
+	</div>
     
 </div>
 <!-- 채팅 목록 리스트 end  -->
@@ -477,38 +130,34 @@
         
           <div class="panel panel-default">
           
-                <div class="panel-heading top-bar">
+                <div class="panel-heading top-bar">									 <!-- 채팅화면 상단바   -->
                 
-                    <div class="col-md-8 col-xs-8">
-                        <h3 class="panel-title"><span class="glyphicon glyphicon-comment"></span>사용자ID(사용자이름)</h3>
+                    <div class="col-md-7 col-xs-8" id="paneltit">
+                        <span id="panel-title"><span class="dot" id="dot"></span>사용자ID(사용자이름)</span>			<!-- 채팅방 이름 [제목]  -->
                     </div>
                     
-                    <div class="col-md-4 col-xs-9" style="text-align: right;">
+                    <div class="col-md-5 col-xs-5" style="text-align: right;" id="iconchat">			
                         <a href="#"><span id="minim_chat_window" class="glyphicon glyphicon-arrow-down icon_arrow-down"></span></a>
                         <a href="#"><span id="plus_chat_window" class="glyphicon glyphicon-plus icon_plus" onclick="newopenForm()"></span></a>
                         <a href="#"><span class="glyphicon glyphicon-remove icon_close_chat" data-id="chat_window_1"></span></a>
                     </div>
                     
                 </div>
+                <!-- 채팅화면 상단바 end -->
+
                 
-                <div id="messagebody" class="panel-body msg_container_base">
+                <div id="messagebody" class="panel-body msg_container_base">   			<!-- 채팅화면 body  -->
                    
                     <div class="row msg_container base_sent">
-                        <div class="col-md-10 col-xs-10">
-                            <div class="messages msg_sent">
-                                <p>Hi</p>
-                                <time datetime="2009-11-13T20:00">Admininstrator • Yesterday 10:05:22</time>
+                        <div class="col-xs-10 col-md-10" id="sent">
+                            <div class="messages msg_sent" id="msgsent">
+                                <p>I kill chatting view and js</p>						<!-- chat data  -->
+                                <time datetime="2009-11-13T20:00">사용자 id 또는 이름 • Yesterday 10:05:38</time>		<!-- 사용자 id와 이름 날짜  -->
                             </div>
-                        </div>
-                        <div class="col-md-2 col-xs-2 avatar">
-                            <img src="https://cheme.mit.edu/wp-content/uploads/2017/01/stephanopoulosgeorge-431x400.jpg" class="chatimg img-responsive ">
                         </div>
                     </div>
                     
                     <div class="row msg_container base_receive">
-                        <div class="col-md-2 col-xs-2 avatar">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Rajesh_Gopinathan.jpg/220px-Rajesh_Gopinathan.jpg" class="chatimg img-responsive ">
-                        </div>
                         <div class="col-md-10 col-xs-10">
                             <div class="messages msg_receive">
                                 <p>Hi sir,</p>
@@ -518,9 +167,6 @@
                     </div>
                     
                     <div class="row msg_container base_receive">
-                        <div class="col-md-2 col-xs-2 avatar">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Rajesh_Gopinathan.jpg/220px-Rajesh_Gopinathan.jpg" class="chatimg img-responsive ">
-                        </div>
                         <div class="col-xs-10 col-md-10">
                             <div class="messages msg_receive">
                                 <p>How are you?</p>
@@ -530,21 +176,15 @@
                     </div>
                     
                     <div class="row msg_container base_sent">
-                        <div class="col-xs-10 col-md-10">
-                            <div class="messages msg_sent">
+                        <div class="col-xs-10 col-md-10" id="sent">
+                            <div class="messages msg_sent" id="msgsent">
                                 <p>I am Fine. Hw about u?</p>
                                 <time datetime="2009-11-13T20:00">Administrator • Yesterday 10:05:38</time>
                             </div>
                         </div>
-                        <div class="col-md-2 col-xs-2 avatar">
-                            <img src="https://cheme.mit.edu/wp-content/uploads/2017/01/stephanopoulosgeorge-431x400.jpg" class="chatimg img-responsive ">
-                        </div>
                     </div>
                     
                     <div class="row msg_container base_receive">
-                        <div class="col-md-2 col-xs-2 avatar">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Rajesh_Gopinathan.jpg/220px-Rajesh_Gopinathan.jpg" class="chatimg img-responsive ">
-                        </div>
                         <div class="col-xs-10 col-md-10">
                             <div class="messages msg_receive">
                                 <p>I am also doing fine. See you later sir.</p>
@@ -553,20 +193,21 @@
                         </div>
                     </div>
                     
-                    <div class="row msg_container base_sent">
-                        <div class="col-md-10 col-xs-10 ">
-                            <div class="messages msg_sent">
-                                <p>Good, Have a nice day.</p>
-                                <time datetime="2009-11-13T20:00">Administrator • Yesterday 10:05:45</time>
+ 					<div class="row msg_container base_sent">
+                        <div class="col-xs-10 col-md-10" id="sent">
+                            <div class="messages msg_sent" id="msgsent">
+                                <p>fuck css and js</p>
+                                <time datetime="2009-11-13T20:00">Administrator • Yesterday 10:05:38</time>
                             </div>
                         </div>
-                        <div class="col-md-2 col-xs-2 avatar">
-                            <img src="https://cheme.mit.edu/wp-content/uploads/2017/01/stephanopoulosgeorge-431x400.jpg" class="chatimg img-responsive ">
-                        </div>
                     </div>
+                    
+                    <!-- 메세지 대화 send 와 receive로 폼 주고 받기~~ -->
+                    
+                    
                 </div>
-                
              </div>
+             <!-- 채팅화면 대화~~ end  -->
              
              <div class="panel-footer">
              	<div class="input-group">
@@ -577,12 +218,13 @@
                 </div>
              </div>
              
+             <!-- 채팅화면 글쓰기 폼 end  -->
+             
         </div>
     </div> 
 </div>
 
 <!-- 채팅화면 div end  -->
-
 
 
 <!-- 새로운 채팅 div  -->
@@ -595,32 +237,52 @@
           
                 <div class="panel-heading top-bar">
                 
-                    <div class="col-md-8 col-xs-8">
+                    <div class="col-md-10 col-xs-8" id="comment" >
                         <span class="comment">새로운대화</span>
                     </div>
                     
-                    <div class="col-md-4 col-xs-4" style="text-align: right;">
+                    <div class="col-md-4 col-xs-5" style="text-align: right;" id="iconclose">
                         <a href="#"><span class="glyphicon glyphicon-remove icon_close_new" data-id="pluschat_window"></span></a>
                     </div>
                     
                 </div> <!-- 새로운대화 상단바  -->
                 
-                <div id="search">
-	    			<input type="text" placeholder="이름을 입력하세요">
-	    		</div>
                 
-                
-                <div id="listbody" class="panel-body msg_container_base">
-                    <div class="row msg_container base_sent">
-                        <div class="col-md-10 col-xs-10">
-                        	<span class="user-display-name__id">(userID)</span>
-							<span class="user-display-name__nickname"> (userName)</span>
-                        </div>
-                    </div>
+                <div id="myDropdown" class="dropdown-content">
+                	<input type="text" placeholder="이름 또는 아지트 아이디를 입력하세요" id="myInput" onkeyup="filterFunction()">
+                	
+                	<div id="member">
+	                	<a href="#(userID)(userName)" onclick="startchat()">
+	                		<span>(userID)3704(userName)지수</span>
+	                		<span class="glyphicon glyphicon-remove icon_close_member" data-id="member"></span>
+	                	</a>                 	
+                	</div>
+                	<div>
+                		<a href="#(userID)(userName)" onclick="startchat()">
+                			<span>(userID)한이(userName)신한</span>
+                			<span class="glyphicon glyphicon-remove icon_close_member" data-id="member"></span>
+                		</a>                 	
+                	</div>
+                	<div>
+	                	<a href="#(userID)(userName)" onclick="startchat()">
+	                		<span>(userID)윤수(userName)이윤수</span>
+	                		<span class="glyphicon glyphicon-remove icon_close_member" data-id="member"></span>
+	                	</a>                 	
+                	</div>
+                	<div>
+	                	<a href="#(userID)(userName)" onclick="startchat()">
+	                		<span>(userID)진우(userName)백진우</span>
+	                		<span class="glyphicon glyphicon-remove icon_close_member" data-id="member"></span>
+	                	</a>                 	
+                	</div>
+
+					<!-- div가 리스트로 출력되어야 함! == db에서 사용자 리스트 가져오기  -->
+					
+					
                 </div>
-           </div>
-   			
+
            <button class="new-chat" id="new-chat">대화시작하기</button>
+           </div>
     
         </div>
     </div>
@@ -630,15 +292,34 @@
 
 
 
+
+
+
+
+
+
+
+
+
 <!-- js -->
+
 <script type="text/javascript">
-	
+	$(document).ready(function() {
+		$('.show1').hide(); 			//페이지를 로드할 때 숨길 요소 [채팅창화면]
+		$('.show2').hide(); 			//페이지를 로드할 때 숨길 요소 [새로운채팅화면]
+	});
+
+</script>
+
+<!-- 채팅 화면  js  -->
+<script type="text/javascript">
+
 	function openForm() {
-	  document.getElementById("chatbox").style.display = "block";
+	  document.getElementById("chatbox").style.display = "block";			/* 사용자명을 클릭하면 보이게  */
 	}
 
 	function closeForm() {
-	  document.getElementById("chatbox").style.display = "none";
+	  document.getElementById("chatbox").style.display = "none";			/* x버튼 클릭하면 창 닫힘 */
 	}
 	
 	$(document).on('click', '.panel-heading span.icon_arrow-down', function (e) {
@@ -668,7 +349,7 @@
 	    var size = $( ".chat-window:last-child" ).css("margin-left");
 	    size_total = parseInt(size) + 400;
 	    alert(size_total);
-	    var clone = $( "#newchat_window" ).clone().appendTo( ".container" );
+	    var clone = $( "#chat_window" ).clone().appendTo( ".container" );
 	    clone.css("margin-left", size_total);
 	});
 	
@@ -676,6 +357,7 @@
 	    //$(this).parent().parent().parent().parent().remove();
 	    $( "#chatbox" ).hide();
 	});
+	
 	
 	// send function start
 
@@ -688,19 +370,16 @@
 	    	alert('Enter Message');
 		} else {
 			var body =      '<div class="row msg_container base_sent">' +
-							'<div class="col-md-10 col-xs-10 ">' +
-	                        '<div class="messages msg_sent">' +
+							'<div class="col-md-10 col-xs-10 " id="sent">' +
+	                        '<div class="messages msg_sent" id="msgsent">' +
 	                        '<p>'+ chat + '</p>'+
-	                        ' <time datetime="2009-11-13T20:00">Administrator • Today '+time+'</time>'+
+	                        ' <time datetime="2009-11-13T20:00">사용자id • Today '+time+'</time>'+
 	                        '</div>' +
-	                        '</div>' +
-	                        '<div class="col-md-2 col-xs-2 avatar">' +
-	                        '<img class="chatimg" src="https://cheme.mit.edu/wp-content/uploads/2017/01/stephanopoulosgeorge-431x400.jpg" class=" img-responsive ">' +
 	                        '</div>' +
 						    '</div>';
 	}
 		
-	$(body).appendTo("#messagebody");
+	$(body).appendTo("#messagebody");							/* 대화 부분에 새로운 대화 전송을 추가한다  */
 	
 	$('#btn-input').val('');
 	
@@ -717,10 +396,12 @@
 	    send()
 	  }
 	});
+	
 </script>
 
 
 
+<!-- 새로운 채팅 추가 js  -->
 <script type="text/javascript">
 	
 	function newopenForm() {
@@ -745,18 +426,122 @@
 	});
 	
 	
-		
-	/* refresh에 리스트만 나오게 하기  */
+</script>
+
+
+
+<!-- 새로운 채팅 = 검색기능 js  -->
+<script type="text/javascript">
 	
-	$(document).ready(function() {
-		$('.show1').hide(); 			//페이지를 로드할 때 표시할 요소
-		$('.show2').hide(); 			//페이지를 로드할 때 숨길 요소
-	});
+	function myFunction() {
+		document.getElementById("myDropdown").classList.toggle("plusshow");
+
+	}
+	
+	function filterFunction() {
+	  var input, filter, ul, li, a, i;
+	  
+	  input = document.getElementById("myInput");
+	  filter = input.value.toUpperCase();
+	  div = document.getElementById("myDropdown");
+	  a = div.getElementsByTagName("a");
+	  
+	  for (i=0; i<a.length; i++) {
+	    txtValue = a[i].textContent || a[i].innerText;
+	    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+	      a[i].style.display = "block";								/* 검색을 하면 리스트 보이게  */
+	    } else {
+	      a[i].style.display = "none";
+	    }
+	  }
+	}
+</script>
+
+
+
+<!-- 채팅목록에서 검색 js  -->
+<script type="text/javascript">
+
+	function list_search() {
+		
+	    var input, filter, ul, li, a, i, txtValue;
+	    input = document.getElementById("listsearch");				/* text에서 값을 받아와서  */
+	    filter = input.value.toUpperCase();
+	    ul = document.getElementById("alllist");					/* db에서 나온 리스트 목록  */
+	    li = ul.getElementsByTagName("li");
+	    
+	    for (i = 0; i < li.length; i++) {
+	        a = li[i].getElementsByTagName("a")[0];
+	        txtValue = a.textContent || a.innerText;
+	        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+	            li[i].style.display = "";
+	        } else {
+	            li[i].style.display = "none";
+	        }
+	    }
+	}
+
+	function startchat() {
+		
+		var clickmem = document.getElementById("new-chat"); 
+		
+		clickmem.style.color = "#497BD9";						//검색해서 나온 이용자를 클릭 하면 버튼 활성화!
+		/* color: #497BD9; 버튼이 파란색으로 바뀐다..... */
+		
+	}
 
 </script>
 
 
 
+<!-- 세션값으로  사용자 로그인 접속 여부 만들기 [초록과 그레이로 구분] -->
+<script type="text/javascript">
+
+	function getParameter(name) {
+	    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+	    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+	        results = regex.exec(location.search);
+	    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));			
+	}
+	//파라미터 값을 받기 위한 기능
+	
+	
+	var memids = getParameter('memid');						//세션값으로?[id&name]	//파라미터 값으로 사용자 id와 이름 가져오기						
+ 	//console.log(memids);
+ 	
+	
+	var str = "";											//배열을 선언해서 여기에 리스트 담기
+	 
+    for (var i = 0; i < $('h2').find('a').length; i++) {	//리스트에 나온 사용자 [이름]을 배열로 선언
+        str += $('h2').find('a').eq(i).text() + ',';		//배열에서 이름 구분을 위한 
+    }
+	
+    var arr = str.split(",");								//구분자를 제외해서 이름별 인덱스번호 지정
+
+    //console.log(arr[3]);
+	
+    var samename = str.includes(memids);					//str이라는 배열 리스트에 이름이 존재한다면 true, 아니면 false
+    console.log(samename);
+    
+    var indexnum = arr.indexOf(memids);						//배열의 인덱스번호값
+    console.log(indexnum);
+    
+    $(function() {
+    	
+	    if(samename == true ) {								//리스트에 존재하는 이름과 같다면 색 변경
+	    	document.getElementsByClassName("dot")[indexnum].style.background = "#2ecc71";		//온라인
+	    } else if(samename == false) {	
+	    	document.getElementsByClassName("dot")[indexnum].style.background = "#bbb";			//오프라인
+	    }
+
+    });
+    
+
+    
+</script>
+
+
+
+
 </body>
-</html>
 </html>

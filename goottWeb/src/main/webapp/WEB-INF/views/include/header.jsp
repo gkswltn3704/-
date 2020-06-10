@@ -13,6 +13,7 @@
 
     <!-- Bootstrap core CSS -->
     <link href="/resources/assets/css/bootstrap.css" rel="stylesheet">
+    
     <!--external css-->
     <link href="/resources/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="/resources/assets/css/zabuto_calendar.css">
